@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using GerenciadorEstoque.Infra.Context;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

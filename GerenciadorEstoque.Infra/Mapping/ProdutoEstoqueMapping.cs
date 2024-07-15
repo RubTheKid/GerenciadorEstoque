@@ -1,6 +1,6 @@
 ﻿using GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GerenciadorEstoque.Infra.Mapping;
 

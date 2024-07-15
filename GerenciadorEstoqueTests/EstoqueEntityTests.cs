@@ -1,7 +1,7 @@
-﻿using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Validations;
-using GerenciadorEstoque.Domain.Aggregates.LojaAggregate;
-using GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate.Validations;
+﻿using GerenciadorEstoque.Domain.Aggregates.LojaAggregate;
+using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Validations;
 using GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate;
+using GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate.Validations;
 using GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate;
 
 namespace GerenciadorEstoqueTests;
@@ -34,7 +34,7 @@ public class EstoqueEntityTests
         var telefone = new TelefoneLoja("24", "99999999");
         var loja = new Loja("Loja Teste", endereco, codigo, telefone);
 
-        Assert.Throws<ArgumentNullException>(() => new ProdutoEstoque( null, loja, 50));
+        Assert.Throws<ArgumentNullException>(() => new ProdutoEstoque(null, loja, 50));
     }
 
     [Fact]
