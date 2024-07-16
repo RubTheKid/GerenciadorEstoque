@@ -1,6 +1,6 @@
 ﻿using GerenciadorEstoque.Application.LojaAggregate.Command.RemoveLoja.Request;
 using GerenciadorEstoque.Application.LojaAggregate.Command.RemoveLoja.Response;
-using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Inferfaces;
+using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Interfaces;
 using MediatR;
 
 namespace GerenciadorEstoque.Application.LojaAggregate.Command.RemoveLoja;

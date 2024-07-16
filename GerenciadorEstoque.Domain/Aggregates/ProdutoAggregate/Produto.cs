@@ -27,4 +27,30 @@ public class Produto : BaseEntity
         Preco = Preco.AlterarPreco(novoValor);
     }
 
+    public void AlterarEstoqueMinimo(int novoEstoqueMinimo)
+    {
+        if (novoEstoqueMinimo < 0)
+        {
+            throw new ArgumentException("O estoque minimo não pode ser negativo.");
+        }
+
+        EstoqueMinimo = novoEstoqueMinimo;
+    }
+
+    public void AlterarNome(string novoNome)
+    {
+        Nome = novoNome ?? throw new ArgumentNullException(nameof(novoNome));
+    }
+
+    public void AlterarDescricao(string novaDescricao)
+    {
+        Descricao = novaDescricao;
+    }
+
+    public void AlterarGtin(string novoGtin)
+    {
+        Gtin = novoGtin ?? throw new ArgumentNullException(nameof(novoGtin));
+    }
+
+
 }

@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace GerenciadorEstoque.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class initialMigration : Migration
+    public partial class initialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,18 +61,13 @@ namespace GerenciadorEstoque.Infra.Migrations
                 name: "ProdutoEstoques",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LojaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Estoque = table.Column<int>(type: "int", precision: 7, nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    Estoque = table.Column<int>(type: "int", precision: 7, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProdutoEstoques", x => x.Id);
+                    table.PrimaryKey("PK_ProdutoEstoques", x => new { x.LojaId, x.ProdutoId });
                     table.ForeignKey(
                         name: "FK_ProdutoEstoques_Lojas_LojaId",
                         column: x => x.LojaId,
@@ -85,16 +81,9 @@ namespace GerenciadorEstoque.Infra.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProdutoEstoques_LojaId",
-                table: "ProdutoEstoques",
-                column: "LojaId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProdutoEstoques_ProdutoId",
                 table: "ProdutoEstoques",
-                column: "ProdutoId",
-                unique: true);
+                column: "ProdutoId");
         }
 
         /// <inheritdoc />

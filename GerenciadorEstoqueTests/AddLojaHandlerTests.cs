@@ -1,7 +1,7 @@
 ﻿using GerenciadorEstoque.Application.LojaAggregate.Command.AddLoja;
 using GerenciadorEstoque.Application.LojaAggregate.Command.AddLoja.Request;
 using GerenciadorEstoque.Domain.Aggregates.LojaAggregate;
-using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Inferfaces;
+using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Interfaces;
 using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Validations;
 using Moq;
 

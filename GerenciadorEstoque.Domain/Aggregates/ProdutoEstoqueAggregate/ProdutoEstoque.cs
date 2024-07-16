@@ -1,10 +1,9 @@
 ﻿using GerenciadorEstoque.Domain.Aggregates.LojaAggregate;
 using GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate;
-using GerenciadorEstoque.Domain.Core;
 
 namespace GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate;
 
-public class ProdutoEstoque : BaseEntity
+public class ProdutoEstoque
 {
     public Guid LojaId { get; private set; }
     public Guid ProdutoId { get; private set; }

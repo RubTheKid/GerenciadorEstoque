@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GerenciadorEstoque.Api\GerenciadorEstoque.Api.csproj" />
     <ProjectReference Include="..\GerenciadorEstoque.Domain\GerenciadorEstoque.Domain.csproj" />
     <ProjectReference Include="..\GerenciadorEstoque.Infra\GerenciadorEstoque.Infra.csproj" />
     <ProjectReference Include="..\GerenciadorEstoque\GerenciadorEstoque.Application.csproj" />

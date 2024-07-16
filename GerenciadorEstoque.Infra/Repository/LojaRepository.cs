@@ -1,5 +1,5 @@
 ﻿using GerenciadorEstoque.Domain.Aggregates.LojaAggregate;
-using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Inferfaces;
+using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Interfaces;
 using GerenciadorEstoque.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 

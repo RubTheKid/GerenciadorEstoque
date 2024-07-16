@@ -1,5 +1,6 @@
 ﻿using GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate;
 using GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate.Interfaces;
+using GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate.Interfaces;
 using GerenciadorEstoque.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,10 +9,12 @@ namespace GerenciadorEstoque.Infra.Repository;
 public class ProdutoRepository : IProdutoRepository
 {
     private readonly AppDbContext _context;
+    private readonly IProdutoEstoqueRepository _produtoEstoqueRepository;
 
-    public ProdutoRepository(AppDbContext context)
+    public ProdutoRepository(AppDbContext context, IProdutoEstoqueRepository produtoEstoqueRepository)
     {
         _context = context;
+        _produtoEstoqueRepository = produtoEstoqueRepository;
     }
 
 
@@ -54,8 +57,6 @@ public class ProdutoRepository : IProdutoRepository
 
         await _context.SaveChangesAsync();
         return produto;
-
-
     }
 
     public async Task Delete(Guid id)
@@ -67,10 +68,10 @@ public class ProdutoRepository : IProdutoRepository
             produto.IsDeleted = true;
             produto.DateDeleted = DateTime.Now;
 
+            await _produtoEstoqueRepository.DeleteByProdutoId(id);
+
             await _context.SaveChangesAsync();
         }
     }
-
-
 
 }

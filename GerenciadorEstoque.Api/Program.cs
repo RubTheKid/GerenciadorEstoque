@@ -1,9 +1,11 @@
-using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Inferfaces;
+using GerenciadorEstoque.Application.ProdutoAggregate.Query.GetAllProdutos;
+using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Interfaces;
 using GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate.Interfaces;
 using GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate.Interfaces;
 using GerenciadorEstoque.Infra.Context;
 using GerenciadorEstoque.Infra.Repository;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,12 @@ builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ILojaRepository, LojaRepository>();
 builder.Services.AddScoped<IProdutoEstoqueRepository, ProdutoEstoqueRepository>();
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+    Assembly.GetExecutingAssembly(),
+    typeof(GetAllProdutosHandler).Assembly // Make sure to include the assembly containing the handlers
+));
 
 var app = builder.Build();
 

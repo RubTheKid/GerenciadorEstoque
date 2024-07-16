@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorEstoque.Application", "GerenciadorEstoque\GerenciadorEstoque.Application.csproj", "{EC084D83-CDA7-4A35-9F00-333CE7E423A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorEstoque.Application", "GerenciadorEstoque\GerenciadorEstoque.Application.csproj", "{EC084D83-CDA7-4A35-9F00-333CE7E423A2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4CD24AC7-5753-4331-BBB9-0285C3B1D19B} = {4CD24AC7-5753-4331-BBB9-0285C3B1D19B}
 		{7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2} = {7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2}
@@ -11,26 +11,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorEstoque.Applicat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{E8746561-F8B9-49A9-8A36-9D9C37994B36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorEstoque.Api", "GerenciadorEstoque.Api\GerenciadorEstoque.Api.csproj", "{93BFD17E-42FA-413E-8293-D95CE1EDE4AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorEstoque.Api", "GerenciadorEstoque.Api\GerenciadorEstoque.Api.csproj", "{93BFD17E-42FA-413E-8293-D95CE1EDE4AD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4CD24AC7-5753-4331-BBB9-0285C3B1D19B} = {4CD24AC7-5753-4331-BBB9-0285C3B1D19B}
 		{EC084D83-CDA7-4A35-9F00-333CE7E423A2} = {EC084D83-CDA7-4A35-9F00-333CE7E423A2}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorEstoque.Domain", "GerenciadorEstoque.Domain\GerenciadorEstoque.Domain.csproj", "{7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorEstoque.Domain", "GerenciadorEstoque.Domain\GerenciadorEstoque.Domain.csproj", "{7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorEstoque.Infra", "GerenciadorEstoque.Infra\GerenciadorEstoque.Infra.csproj", "{4CD24AC7-5753-4331-BBB9-0285C3B1D19B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorEstoque.Infra", "GerenciadorEstoque.Infra\GerenciadorEstoque.Infra.csproj", "{4CD24AC7-5753-4331-BBB9-0285C3B1D19B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2} = {7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorEstoqueTests", "GerenciadorEstoqueTests\GerenciadorEstoqueTests.csproj", "{FCC9FF11-29C1-453A-B98D-820560926949}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorEstoqueTests", "GerenciadorEstoqueTests\GerenciadorEstoqueTests.csproj", "{FCC9FF11-29C1-453A-B98D-820560926949}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4CD24AC7-5753-4331-BBB9-0285C3B1D19B} = {4CD24AC7-5753-4331-BBB9-0285C3B1D19B}
 		{7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2} = {7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2}
 		{93BFD17E-42FA-413E-8293-D95CE1EDE4AD} = {93BFD17E-42FA-413E-8293-D95CE1EDE4AD}
 		{EC084D83-CDA7-4A35-9F00-333CE7E423A2} = {EC084D83-CDA7-4A35-9F00-333CE7E423A2}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{D5DB3465-55E0-432E-A15A-B22FFFDDA99F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

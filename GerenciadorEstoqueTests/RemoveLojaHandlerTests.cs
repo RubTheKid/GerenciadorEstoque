@@ -1,7 +1,7 @@
 ﻿using GerenciadorEstoque.Application.LojaAggregate.Command.RemoveLoja;
 using GerenciadorEstoque.Application.LojaAggregate.Command.RemoveLoja.Request;
 using GerenciadorEstoque.Domain.Aggregates.LojaAggregate;
-using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Inferfaces;
+using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Interfaces;
 using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Validations;
 using Moq;
 

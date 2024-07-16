@@ -1,4 +1,4 @@
-﻿namespace GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Inferfaces;
+﻿namespace GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Interfaces;
 
 public interface ILojaRepository
 {

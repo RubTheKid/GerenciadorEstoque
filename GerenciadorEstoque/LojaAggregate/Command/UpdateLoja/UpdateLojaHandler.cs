@@ -1,15 +1,11 @@
 ﻿using GerenciadorEstoque.Application.LojaAggregate.Command.UpdateLoja.Request;
 using GerenciadorEstoque.Application.LojaAggregate.Command.UpdateLoja.Response;
-using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Inferfaces;
+using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Interfaces;
 using MediatR;
 
 namespace GerenciadorEstoque.Application.LojaAggregate.Command.UpdateLoja;
 
-public class UpdateLojaHandler :
-        IRequestHandler<UpdateNomeRequest, UpdateLojaResponse>,
-        IRequestHandler<UpdateEnderecoRequest, UpdateLojaResponse>,
-        IRequestHandler<UpdateCodigoRequest, UpdateLojaResponse>,
-        IRequestHandler<UpdateTelefoneRequest, UpdateLojaResponse>
+public class UpdateLojaHandler : IRequestHandler<UpdateLojaRequest, UpdateLojaResponse>
 {
     private readonly ILojaRepository _repository;
 
@@ -18,7 +14,7 @@ public class UpdateLojaHandler :
         _repository = repository;
     }
 
-    public async Task<UpdateLojaResponse> Handle(UpdateNomeRequest request, CancellationToken cancellationToken)
+    public async Task<UpdateLojaResponse> Handle(UpdateLojaRequest request, CancellationToken cancellationToken)
     {
         if (request == null)
         {
@@ -31,85 +27,26 @@ public class UpdateLojaHandler :
             throw new Exception("Loja não encontrada");
         }
 
-        loja.AlterarNome(request.NovoNome);
-        await _repository.Update(loja);
-
-        return new UpdateLojaResponse
+        if (!string.IsNullOrEmpty(request.NovoNome))
         {
-            Id = loja.Id,
-            Nome = loja.Nome,
-            Telefone = loja.Telefone,
-            Endereco = loja.Endereco,
-            Codigo = loja.Codigo
-        };
-    }
-
-    public async Task<UpdateLojaResponse> Handle(UpdateEnderecoRequest request, CancellationToken cancellationToken)
-    {
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
+            loja.AlterarNome(request.NovoNome);
         }
 
-        var loja = await _repository.GetById(request.LojaId);
-        if (loja == null)
+        if (request.NovoEndereco != null)
         {
-            throw new Exception("Loja não encontrada");
+            loja.AlterarEndereco(request.NovoEndereco);
         }
 
-        loja.AlterarEndereco(request.NovoEndereco);
-        await _repository.Update(loja);
-
-        return new UpdateLojaResponse
+        if (request.NovoCodigo != null)
         {
-            Id = loja.Id,
-            Nome = loja.Nome,
-            Telefone = loja.Telefone,
-            Endereco = loja.Endereco,
-            Codigo = loja.Codigo
-        };
-    }
-
-    public async Task<UpdateLojaResponse> Handle(UpdateCodigoRequest request, CancellationToken cancellationToken)
-    {
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
+            loja.AlterarCodigo(request.NovoCodigo);
         }
 
-        var loja = await _repository.GetById(request.LojaId);
-        if (loja == null)
+        if (request.NovoTelefone != null)
         {
-            throw new Exception("Loja não encontrada");
+            loja.AlterarTelefone(request.NovoTelefone);
         }
 
-        loja.AlterarCodigo(request.NovoCodigo);
-        await _repository.Update(loja);
-
-        return new UpdateLojaResponse
-        {
-            Id = loja.Id,
-            Nome = loja.Nome,
-            Telefone = loja.Telefone,
-            Endereco = loja.Endereco,
-            Codigo = loja.Codigo
-        };
-    }
-
-    public async Task<UpdateLojaResponse> Handle(UpdateTelefoneRequest request, CancellationToken cancellationToken)
-    {
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
-        }
-
-        var loja = await _repository.GetById(request.LojaId);
-        if (loja == null)
-        {
-            throw new Exception("Loja não encontrada");
-        }
-
-        loja.AlterarTelefone(request.NovoTelefone);
         await _repository.Update(loja);
 
         return new UpdateLojaResponse

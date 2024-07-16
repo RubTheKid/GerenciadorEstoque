@@ -1,21 +1,25 @@
 ﻿using GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate;
 using GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate.Validations;
+using GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate.Interfaces;
 using GerenciadorEstoque.Infra.Context;
 using GerenciadorEstoque.Infra.Repository;
 using Microsoft.EntityFrameworkCore;
+using Moq; // Assuming you are using Moq for mocking
 
 namespace GerenciadorEstoqueTests;
 
 public class ProdutoRepositoryTests
 {
-
     private ProdutoRepository CreateRepository()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .Options;
         var context = new AppDbContext(options);
-        return new ProdutoRepository(context);
+
+        var mockProdutoEstoqueRepository = new Mock<IProdutoEstoqueRepository>();
+
+        return new ProdutoRepository(context, mockProdutoEstoqueRepository.Object);
     }
 
     private Produto CreateProduto()
@@ -110,6 +114,4 @@ public class ProdutoRepositoryTests
         Assert.NotNull(deletedProduto);
         Assert.True(deletedProduto.IsDeleted);
     }
-
-
 }

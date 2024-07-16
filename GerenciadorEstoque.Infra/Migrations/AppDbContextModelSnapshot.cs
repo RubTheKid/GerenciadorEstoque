@@ -98,40 +98,20 @@ namespace GerenciadorEstoque.Infra.Migrations
 
             modelBuilder.Entity("GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate.ProdutoEstoque", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateDeleted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Estoque")
-                        .HasPrecision(7)
-                        .HasColumnType("int")
-                        .HasColumnName("Estoque");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<Guid>("LojaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProdutoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Estoque")
+                        .HasPrecision(7)
+                        .HasColumnType("int")
+                        .HasColumnName("Estoque");
 
-                    b.HasIndex("LojaId")
-                        .IsUnique();
+                    b.HasKey("LojaId", "ProdutoId");
 
-                    b.HasIndex("ProdutoId")
-                        .IsUnique();
+                    b.HasIndex("ProdutoId");
 
                     b.ToTable("ProdutoEstoques", (string)null);
                 });
@@ -263,14 +243,14 @@ namespace GerenciadorEstoque.Infra.Migrations
             modelBuilder.Entity("GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate.ProdutoEstoque", b =>
                 {
                     b.HasOne("GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Loja", "Loja")
-                        .WithOne()
-                        .HasForeignKey("GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate.ProdutoEstoque", "LojaId")
+                        .WithMany()
+                        .HasForeignKey("LojaId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate.Produto", "Produto")
-                        .WithOne()
-                        .HasForeignKey("GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate.ProdutoEstoque", "ProdutoId")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

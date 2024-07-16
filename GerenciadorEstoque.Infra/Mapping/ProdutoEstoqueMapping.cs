@@ -8,17 +8,17 @@ public class ProdutoEstoqueMapping : IEntityTypeConfiguration<ProdutoEstoque>
 {
     public void Configure(EntityTypeBuilder<ProdutoEstoque> builder)
     {
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => new { x.LojaId, x.ProdutoId });
 
         builder.HasOne(x => x.Produto)
-               .WithOne()
-               .HasForeignKey<ProdutoEstoque>(x => x.ProdutoId)
-               .IsRequired()
-               .OnDelete(DeleteBehavior.NoAction);
+                  .WithMany()
+                  .HasForeignKey(x => x.ProdutoId)
+                  .IsRequired()
+                  .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasOne(x => x.Loja)
-               .WithOne()
-               .HasForeignKey<ProdutoEstoque>(x => x.LojaId)
+               .WithMany()
+               .HasForeignKey(x => x.LojaId)
                .IsRequired()
                .OnDelete(DeleteBehavior.NoAction);
 
