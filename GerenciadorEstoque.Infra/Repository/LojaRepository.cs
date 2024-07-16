@@ -3,7 +3,7 @@ using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Inferfaces;
 using GerenciadorEstoque.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace GerenciadorEstoque.Infra.Repositry;
+namespace GerenciadorEstoque.Infra.Repository;
 
 public class LojaRepository : ILojaRepository
 {

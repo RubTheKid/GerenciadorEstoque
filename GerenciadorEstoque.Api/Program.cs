@@ -1,4 +1,8 @@
+using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Inferfaces;
+using GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate.Interfaces;
+using GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate.Interfaces;
 using GerenciadorEstoque.Infra.Context;
+using GerenciadorEstoque.Infra.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +15,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<ILojaRepository, LojaRepository>();
+builder.Services.AddScoped<IProdutoEstoqueRepository, ProdutoEstoqueRepository>();
+
 
 var app = builder.Build();
 

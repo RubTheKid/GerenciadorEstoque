@@ -2,6 +2,7 @@
 
 public interface IProdutoEstoqueRepository
 {
+    Task<IEnumerable<ProdutoEstoque>> GetByLojaIdAndProdutoId(Guid lojaId, Guid ProdutoId);
     Task<IEnumerable<ProdutoEstoque>> GetByLojaId(Guid lojaId);
     Task<IEnumerable<ProdutoEstoque>> GetByProdutoId(Guid produtoId);
     Task<ProdutoEstoque> Create(ProdutoEstoque produtoEstoque);
