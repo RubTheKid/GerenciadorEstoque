@@ -23,12 +23,12 @@ public class AddLojaHandler : IRequestHandler<AddLojaRequest, AddLojaResponse>
         }
 
         var loja = new Loja
-        (
+            (
                 request.Nome,
-                request.Endereco,
                 request.Codigo,
+                request.Endereco,
                 request.Telefone
-        );
+            );
 
         await _repository.Create(loja);
 

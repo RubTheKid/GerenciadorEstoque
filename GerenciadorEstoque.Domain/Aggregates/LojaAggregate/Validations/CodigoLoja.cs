@@ -4,7 +4,7 @@ namespace GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Validations;
 
 public class CodigoLoja
 {
-    public string Codigo { get; private set; }
+    public string Codigo { get; set; }
 
     public CodigoLoja(string codigo)
     {

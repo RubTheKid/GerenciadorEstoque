@@ -1,14 +1,14 @@
+using GerenciadorEstoque.Presentation.Services.EstoqueServices;
 using GerenciadorEstoque.Presentation.Services.LojaServices;
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddHttpClient("GerenciadorApi", p =>
+builder.Services.AddHttpClient("GerenciadorApi", client =>
 {
-    p.BaseAddress = new Uri(builder.Configuration["ServiceURI:GerenciadorApi"]);
+    client.BaseAddress = new Uri(builder.Configuration["ServiceURI:GerenciadorApi"]);
 });
 
 builder.Services.AddSingleton(new JsonSerializerOptions
@@ -17,14 +17,13 @@ builder.Services.AddSingleton(new JsonSerializerOptions
 });
 
 builder.Services.AddScoped<ILojaService, LojaService>();
+builder.Services.AddScoped<IEstoqueService, EstoqueService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

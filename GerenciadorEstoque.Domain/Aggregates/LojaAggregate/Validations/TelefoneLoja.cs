@@ -2,24 +2,20 @@
 
 public class TelefoneLoja
 {
-    private string telefone;
 
-    public string CodigoArea { get; private set; }
-    public string Numero { get; private set; }
+    public string CodigoArea { get; set; }
+    public string Numero { get; set; }
 
     public string Telefone => CodigoArea + string.Empty + Numero;
+
+
+    private TelefoneLoja() { }
 
     public TelefoneLoja(string codigoArea, string numero)
     {
         CodigoArea = codigoArea;
         Numero = numero;
-
         Validar();
-    }
-
-    public TelefoneLoja(string telefone)
-    {
-        this.telefone = telefone;
     }
 
     public void Validar()

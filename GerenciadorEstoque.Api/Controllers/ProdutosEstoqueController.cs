@@ -1,5 +1,4 @@
 ﻿using GerenciadorEstoque.Application.ProdutoEstoqueAggregate.Command.AddProdutoEstoque.Request;
-using GerenciadorEstoque.Application.ProdutoEstoqueAggregate.Command.DeleteProdutoEstoque.Request;
 using GerenciadorEstoque.Application.ProdutoEstoqueAggregate.Command.UpdateProdutoEstoque.Request;
 using GerenciadorEstoque.Application.ProdutoEstoqueAggregate.Query.GetProdutoEstoque.Request;
 using MediatR;
@@ -76,5 +75,5 @@ public class ProdutoEstoqueController : ControllerBase
         return Ok(response);
     }
 
-  
+
 }

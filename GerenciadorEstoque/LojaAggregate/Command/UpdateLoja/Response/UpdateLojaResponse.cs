@@ -6,7 +6,7 @@ public sealed record UpdateLojaResponse
 {
     public Guid Id { get; set; }
     public string Nome { get; set; }
-    public CodigoLoja Codigo { get; set; }
     public Endereco Endereco { get; set; }
+    public CodigoLoja Codigo { get; set; }
     public TelefoneLoja Telefone { get; set; }
 }

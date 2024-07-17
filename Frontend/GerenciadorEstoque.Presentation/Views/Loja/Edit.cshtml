@@ -1,0 +1,103 @@
+﻿@model GerenciadorEstoque.Presentation.Models.LojaViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Editar Loja</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input asp-for="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Codigo.Codigo" class="control-label">Codigo da loja</label>
+                    <input asp-for="Codigo.Codigo" class="form-control" data-mask="0000" />
+                    <span asp-validation-for="Codigo.Codigo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-1">
+                    <label asp-for="Telefone.CodigoArea" class="control-label">DDD</label>
+                    <input asp-for="Telefone.CodigoArea" class="form-control" data-mask="00"/>
+                    <span asp-validation-for="Telefone.CodigoArea" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Telefone.Numero" class="control-label">Telefone</label>
+                    <input asp-for="Telefone.Numero" class="form-control" data-mask="000000000" />
+                    <span asp-validation-for="Telefone.Numero" class="text-danger"></span>
+                </div>
+            </div>
+
+            <fieldset>
+                <legend>Endereco</legend>
+                <hr />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Endereco.Logradouro" class="control-label"></label>
+                        <input asp-for="Endereco.Logradouro" class="form-control" />
+                        <span asp-validation-for="Endereco.Logradouro" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label asp-for="Endereco.EnderecoNumero" class="control-label">Numero</label>
+                        <input asp-for="Endereco.EnderecoNumero" class="form-control" />
+                        <span asp-validation-for="Endereco.EnderecoNumero" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="Endereco.Complemento" class="control-label"></label>
+                        <input asp-for="Endereco.Complemento" class="form-control" />
+                        <span asp-validation-for="Endereco.Complemento" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label asp-for="Endereco.Bairro" class="control-label"></label>
+                        <input asp-for="Endereco.Bairro" class="form-control" />
+                        <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label asp-for="Endereco.Cidade" class="control-label"></label>
+                        <input asp-for="Endereco.Cidade" class="form-control" />
+                        <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label asp-for="Endereco.Estado" class="control-label"></label>
+                        <input asp-for="Endereco.Estado" class="form-control" maxlength="2" oninput="this.value = this.value.toUpperCase();" />
+                        <span asp-validation-for="Endereco.Estado" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="Endereco.Cep" class="control-label"></label>
+                        <input asp-for="Endereco.Cep" class="form-control" data-mask="00000-000" />
+                        <span asp-validation-for="Endereco.Cep" class="text-danger"></span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-group mt-4 text-end">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[data-mask]').each(function () {
+                $(this).mask($(this).data('mask'));
+            });
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

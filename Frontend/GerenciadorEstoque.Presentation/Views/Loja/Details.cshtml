@@ -1,0 +1,77 @@
+﻿@model GerenciadorEstoque.Presentation.Models.LojaDetalhesViewModel
+
+@{
+    ViewData["Title"] = "Detalhes da Loja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-between mb-4">
+    <h1 class="my-4">@ViewData["Title"]</h1>
+    <a href="@Url.Action("Edit", "Loja", new { id = Model.Loja.Id })" class="btn btn-primary btn-md align-self-center">Editar Loja</a>
+</div>
+
+<div>
+    <h4>Informações da Loja</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Nome</dt>
+        <dd class="col-sm-10">@Model.Loja.Nome</dd>
+        <dt class="col-sm-2">Código</dt>
+        <dd class="col-sm-10">@Model.Loja.Codigo.Codigo</dd>
+        <dt class="col-sm-2">Endereço</dt>
+        <dd class="col-sm-10">
+            @Model.Loja.Endereco.Logradouro, @Model.Loja.Endereco.EnderecoNumero<br />
+            @if (!string.IsNullOrEmpty(Model.Loja.Endereco.Complemento))
+            {
+                @Model.Loja.Endereco.Complemento
+
+                <br />
+            }
+            @Model.Loja.Endereco.Bairro, @Model.Loja.Endereco.Cidade - @Model.Loja.Endereco.Estado<br />
+            @Model.Loja.Endereco.Cep
+        </dd>
+        <dt class="col-sm-2">Telefone</dt>
+        <dd class="col-sm-10">(@Model.Loja.Telefone.CodigoArea) @Model.Loja.Telefone.Numero</dd>
+    </dl>
+</div>
+
+<div>
+    <h4>Estoque</h4>
+    <hr />
+    @if (Model.Estoque != null && Model.Estoque.Any())
+    {
+        <table class="table table-striped table-hover table-responsive">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="col-md-3">Produto</th>
+                    <th scope="col" class="col-md-3">Descrição</th>
+                    <th scope="col" class="col-md-2">Estoque</th>
+                    <th scope="col" class="col-md-2">Estoque Mínimo</th>
+                    <th scope="col" class="col-md-2">Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Estoque)
+                {
+                    <tr>
+                        <td>@item.ProdutoNome</td>
+                        <td>@item.Descricao</td>
+                        <td>@item.Estoque</td>
+                        <td>@item.EstoqueMinimo</td>
+                        <td>@item.Preco.Valor.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            Nenhum estoque encontrado para esta loja.
+        </div>
+    }
+</div>
+
+<div>
+    <a href="@Url.Action("Index", "Loja")" class="btn btn-secondary">Voltar para a Lista</a>
+</div>

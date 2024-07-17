@@ -27,7 +27,10 @@ public class ProdutoEstoqueHandler : IRequestHandler<GetProdutoEstoqueByLojaIdRe
             LojaId = pe.LojaId,
             Estoque = pe.Estoque,
             ProdutoNome = pe.Produto.Nome,
-            LojaNome = pe.Loja.Nome
+            LojaNome = pe.Loja.Nome,
+            Preco = pe.Produto.Preco,
+            Descricao = pe.Produto.Descricao,
+            EstoqueMinimo = pe.Produto.EstoqueMinimo,
         });
     }
 
@@ -42,6 +45,7 @@ public class ProdutoEstoqueHandler : IRequestHandler<GetProdutoEstoqueByLojaIdRe
             Estoque = pe.Estoque,
             ProdutoNome = pe.Produto.Nome,
             LojaNome = pe.Loja.Nome
+
         });
     }
 

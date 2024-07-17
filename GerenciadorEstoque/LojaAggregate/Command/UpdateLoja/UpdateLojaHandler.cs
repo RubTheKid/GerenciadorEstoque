@@ -14,6 +14,7 @@ public class UpdateLojaHandler : IRequestHandler<UpdateLojaRequest, UpdateLojaRe
         _repository = repository;
     }
 
+
     public async Task<UpdateLojaResponse> Handle(UpdateLojaRequest request, CancellationToken cancellationToken)
     {
         if (request == null)
@@ -21,41 +22,22 @@ public class UpdateLojaHandler : IRequestHandler<UpdateLojaRequest, UpdateLojaRe
             throw new ArgumentNullException(nameof(request));
         }
 
-        var loja = await _repository.GetById(request.LojaId);
-        if (loja == null)
-        {
-            throw new Exception("Loja não encontrada");
-        }
+        var lojaCadastrada = await _repository.GetById(request.Id);
 
-        if (!string.IsNullOrEmpty(request.NovoNome))
+        if (lojaCadastrada != null)
         {
-            loja.AlterarNome(request.NovoNome);
-        }
+            lojaCadastrada.AtualizarLoja(request.Nome, request.Codigo, request.Endereco, request.Telefone);
 
-        if (request.NovoEndereco != null)
-        {
-            loja.AlterarEndereco(request.NovoEndereco);
+            await _repository.Update(lojaCadastrada);
         }
-
-        if (request.NovoCodigo != null)
-        {
-            loja.AlterarCodigo(request.NovoCodigo);
-        }
-
-        if (request.NovoTelefone != null)
-        {
-            loja.AlterarTelefone(request.NovoTelefone);
-        }
-
-        await _repository.Update(loja);
 
         return new UpdateLojaResponse
         {
-            Id = loja.Id,
-            Nome = loja.Nome,
-            Telefone = loja.Telefone,
-            Endereco = loja.Endereco,
-            Codigo = loja.Codigo
+            Id = lojaCadastrada.Id,
+            Nome = lojaCadastrada.Nome,
+            Telefone = lojaCadastrada.Telefone,
+            Endereco = lojaCadastrada.Endereco,
+            Codigo = lojaCadastrada.Codigo
         };
     }
 }

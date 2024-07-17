@@ -19,7 +19,6 @@ public class TelefoneViewModel
 {
     public string Numero { get; set; }
     public string CodigoArea { get; set; }
-    public string Telefone { get; set; }
 }
 
 public class EnderecoViewModel
@@ -32,3 +31,4 @@ public class EnderecoViewModel
     public string Estado { get; set; }
     public string Cep { get; set; }
 }
+

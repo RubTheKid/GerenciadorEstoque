@@ -2,14 +2,13 @@
 using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Validations;
 using MediatR;
 
-namespace GerenciadorEstoque.Application.LojaAggregate.Command.UpdateLoja.Request
+namespace GerenciadorEstoque.Application.LojaAggregate.Command.UpdateLoja.Request;
+
+public sealed record UpdateLojaRequest : IRequest<UpdateLojaResponse>
 {
-    public sealed record UpdateLojaRequest : IRequest<UpdateLojaResponse>
-    {
-        public Guid LojaId { get; set; }
-        public string NovoNome { get; set; }
-        public Endereco NovoEndereco { get; set; }
-        public CodigoLoja NovoCodigo { get; set; }
-        public TelefoneLoja NovoTelefone { get; set; }
-    }
+    public Guid Id { get; set; }
+    public string Nome { get; set; }
+    public Endereco Endereco { get; set; }
+    public CodigoLoja Codigo { get; set; }
+    public TelefoneLoja Telefone { get; set; }
 }
