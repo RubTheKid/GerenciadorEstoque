@@ -1,11 +1,14 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
-namespace GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Validations;
+namespace GerenciadorEstoque.Domain.Entities.LojaAggregate.Validations;
 
 public class Endereco
 {
-    private string endereco;
-
     public string Logradouro { get; private set; }
     public string EnderecoNumero { get; private set; }
     public string Complemento { get; private set; }
@@ -26,11 +29,6 @@ public class Endereco
 
 
         ValidarCep();
-    }
-
-    public Endereco(string endereco)
-    {
-        this.endereco = endereco;
     }
 
     public void ValidarCep()

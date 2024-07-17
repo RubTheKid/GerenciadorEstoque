@@ -1,9 +1,13 @@
-﻿namespace GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Validations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GerenciadorEstoque.Domain.Entities.LojaAggregate.Validations;
 
 public class TelefoneLoja
 {
-    private string telefone;
-
     public string CodigoArea { get; private set; }
     public string Numero { get; private set; }
 
@@ -15,11 +19,6 @@ public class TelefoneLoja
         Numero = numero;
 
         Validar();
-    }
-
-    public TelefoneLoja(string telefone)
-    {
-        this.telefone = telefone;
     }
 
     public void Validar()

@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorEstoque.Infra", 
 		{7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2} = {7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorEstoqueTests", "GerenciadorEstoqueTests\GerenciadorEstoqueTests.csproj", "{FCC9FF11-29C1-453A-B98D-820560926949}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorEstoque.Tests", "GerenciadorEstoqueTests\GerenciadorEstoque.Tests.csproj", "{FCC9FF11-29C1-453A-B98D-820560926949}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4CD24AC7-5753-4331-BBB9-0285C3B1D19B} = {4CD24AC7-5753-4331-BBB9-0285C3B1D19B}
 		{7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2} = {7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2}
@@ -33,6 +33,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorEstoqueTests", "
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{D5DB3465-55E0-432E-A15A-B22FFFDDA99F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorEstoque.Presentation", "FrontEnd\GerenciadorEstoque.Presentation\GerenciadorEstoque.Presentation.csproj", "{5DD9C636-9FA4-4941-A534-9B68987F3286}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorEstoque.Tests", "Frontend\GerenciadorEstoque.Tests\GerenciadorEstoque.Tests.csproj", "{C355A0F1-37C1-48D8-8CCB-668E50C20187}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +64,14 @@ Global
 		{FCC9FF11-29C1-453A-B98D-820560926949}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCC9FF11-29C1-453A-B98D-820560926949}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCC9FF11-29C1-453A-B98D-820560926949}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DD9C636-9FA4-4941-A534-9B68987F3286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DD9C636-9FA4-4941-A534-9B68987F3286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DD9C636-9FA4-4941-A534-9B68987F3286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DD9C636-9FA4-4941-A534-9B68987F3286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C355A0F1-37C1-48D8-8CCB-668E50C20187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C355A0F1-37C1-48D8-8CCB-668E50C20187}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C355A0F1-37C1-48D8-8CCB-668E50C20187}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C355A0F1-37C1-48D8-8CCB-668E50C20187}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +82,8 @@ Global
 		{7E551AF5-DB9E-4F36-9E20-814BE9EEE9E2} = {E8746561-F8B9-49A9-8A36-9D9C37994B36}
 		{4CD24AC7-5753-4331-BBB9-0285C3B1D19B} = {E8746561-F8B9-49A9-8A36-9D9C37994B36}
 		{FCC9FF11-29C1-453A-B98D-820560926949} = {E8746561-F8B9-49A9-8A36-9D9C37994B36}
+		{5DD9C636-9FA4-4941-A534-9B68987F3286} = {D5DB3465-55E0-432E-A15A-B22FFFDDA99F}
+		{C355A0F1-37C1-48D8-8CCB-668E50C20187} = {D5DB3465-55E0-432E-A15A-B22FFFDDA99F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {204161A9-28BF-40E1-B6AC-C1E81035FEA0}
