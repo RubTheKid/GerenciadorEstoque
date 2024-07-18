@@ -7,7 +7,7 @@ public class LojaService : ILojaService
 {
     private readonly IHttpClientFactory _clientFactory;
     private readonly JsonSerializerOptions _options;
-    private const string apiEndpoint = "api/lojas";  
+    private const string apiEndpoint = "api/lojas";
 
     public LojaService(IHttpClientFactory clientFactory, JsonSerializerOptions options)
     {
@@ -70,7 +70,7 @@ public class LojaService : ILojaService
     {
         var client = _clientFactory.CreateClient("GerenciadorApi");
         var lojaJson = new StringContent(JsonSerializer.Serialize(loja, _options), System.Text.Encoding.UTF8, "application/json");
-        var response = await client.PutAsync($"{apiEndpoint}/{loja.Id}", lojaJson);
+        var response = await client.PutAsync($"{apiEndpoint}", lojaJson);
 
         return response.IsSuccessStatusCode;
     }

@@ -43,4 +43,31 @@ public class EstoqueService : IEstoqueService
             return null;
         }
     }
+
+    public async Task<IEnumerable<EstoqueViewModel>> GetEstoqueByProdutoId(Guid produtoId)
+    {
+        try
+        {
+            var client = _clientFactory.CreateClient("GerenciadorApi");
+            var response = await client.GetAsync($"{apiEndpoint}/produto/{produtoId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var apiResponse = await response.Content.ReadAsStreamAsync();
+                var estoque = await JsonSerializer.DeserializeAsync<IEnumerable<EstoqueViewModel>>(apiResponse, _options);
+                return estoque;
+            }
+            else
+            {
+                _logger.LogError($"Failed to get estoque for lojaId {produtoId}. StatusCode: {response.StatusCode}");
+                return null;
+            }
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"Exception occurred while getting estoque for lojaId {produtoId}");
+            return null;
+        }
+    }
 }

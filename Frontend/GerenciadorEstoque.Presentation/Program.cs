@@ -1,5 +1,6 @@
 using GerenciadorEstoque.Presentation.Services.EstoqueServices;
 using GerenciadorEstoque.Presentation.Services.LojaServices;
+using GerenciadorEstoque.Presentation.Services.ProdutoServices;
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,7 @@ builder.Services.AddSingleton(new JsonSerializerOptions
 
 builder.Services.AddScoped<ILojaService, LojaService>();
 builder.Services.AddScoped<IEstoqueService, EstoqueService>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
 
 var app = builder.Build();
 

@@ -68,9 +68,9 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> Put(Guid id, UpdateProdutoRequest request)
+    public async Task<IActionResult> Put(UpdateProdutoRequest request)
     {
-        request.Id = id;
+        
         var response = await _mediator.Send(request);
 
         if (response is null) return NotFound();

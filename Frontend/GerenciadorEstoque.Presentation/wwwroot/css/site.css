@@ -1,6 +1,12 @@
-﻿/* General styles */
+﻿html, body {
+    height: 100%;
+    margin: 0;
+}
+
 body {
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Navbar */
@@ -23,6 +29,9 @@ footer {
     background-color: #f8f9fa;
     padding: 10px 0;
     text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
 /* Table styles */
@@ -61,4 +70,28 @@ footer {
     background-color: #fff3cd;
     color: #856404;
     border-color: #ffeeba;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
+.flex-grow-1 {
+    flex-grow: 1 ;
+}
+
+main {
+    flex-grow: 1;
 }

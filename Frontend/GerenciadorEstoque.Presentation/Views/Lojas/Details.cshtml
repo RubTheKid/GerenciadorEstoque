@@ -7,7 +7,7 @@
 
 <div class="d-flex justify-content-between mb-4">
     <h1 class="my-4">@ViewData["Title"]</h1>
-    <a href="@Url.Action("Edit", "Loja", new { id = Model.Loja.Id })" class="btn btn-primary btn-md align-self-center">Editar Loja</a>
+    <a href="@Url.Action("Edit", "Lojas", new { id = Model.Loja.Id })" class="btn btn-primary btn-md align-self-center">Editar Loja</a>
 </div>
 
 <div>
@@ -48,6 +48,7 @@
                     <th scope="col" class="col-md-2">Estoque</th>
                     <th scope="col" class="col-md-2">Estoque Mínimo</th>
                     <th scope="col" class="col-md-2">Preço</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -59,6 +60,10 @@
                         <td>@item.Estoque</td>
                         <td>@item.EstoqueMinimo</td>
                         <td>@item.Preco.Valor.ToString("C")</td>
+                        <td class="text-end">
+                            <a href="@Url.Action("Details", "Produtos", new { id = item.ProdutoId })" class="btn btn-primary btn-md">Visualizar</a>
+                        </td>
+
                     </tr>
                 }
             </tbody>
@@ -73,5 +78,5 @@
 </div>
 
 <div>
-    <a href="@Url.Action("Index", "Loja")" class="btn btn-secondary">Voltar para a Lista</a>
+    <a href="@Url.Action("Index", "Lojas")" class="btn btn-secondary">Voltar para a Lista</a>
 </div>

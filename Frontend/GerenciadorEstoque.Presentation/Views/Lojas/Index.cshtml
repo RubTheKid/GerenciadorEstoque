@@ -7,7 +7,7 @@
 
 <div class="d-flex justify-content-between mb-4">
     <h1 class="my-4">@ViewData["Title"]</h1>
-    <a href="@Url.Action("Create", "Loja")" class="btn btn-success btn-md align-self-center">Adicionar Loja</a>
+    <a href="@Url.Action("Create", "Lojas")" class="btn btn-success btn-md align-self-center">Adicionar Loja</a>
 </div>
 
 @if (!Model.Any())
@@ -48,8 +48,8 @@ else
                         (@loja.Telefone.CodigoArea) @loja.Telefone.Numero<br />
                     </td>
                     <td class="text-end">
-                        <a href="@Url.Action("Details", "Loja", new { id = loja.Id })" class="btn btn-primary btn-md">Visualizar</a>
-                        <a href="@Url.Action("Edit", "Loja", new { id = loja.Id })" class="btn btn-primary btn-md">Editar</a>
+                        <a href="@Url.Action("Details", "Lojas", new { id = loja.Id })" class="btn btn-primary btn-md">Visualizar</a>
+                        <a href="@Url.Action("Edit", "Lojas", new { id = loja.Id })" class="btn btn-primary btn-md">Editar</a>
                     </td>
                 </tr>
             }

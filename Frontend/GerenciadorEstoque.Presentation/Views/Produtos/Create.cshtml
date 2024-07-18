@@ -1,0 +1,86 @@
+﻿@model GerenciadorEstoque.Presentation.Models.ProdutoViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>ProdutoViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" method="post" id="produtoForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input asp-for="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Descricao" class="control-label"></label>
+                    <input asp-for="Descricao" class="form-control" />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Gtin" class="control-label"></label>
+                    <input asp-for="Gtin" class="form-control" />
+                    <span asp-validation-for="Gtin" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="EstoqueMinimo" class="control-label"></label>
+                    <input asp-for="EstoqueMinimo" class="form-control" />
+                    <span asp-validation-for="EstoqueMinimo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <fieldset>
+                <legend>Preço</legend>
+                <hr />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Preco" class="control-label"></label>
+                        <input asp-for="Preco" class="form-control" data-mask="000.000.000.000.000,00" data-mask-reverse="true" />
+                        <span asp-validation-for="Preco" class="text-danger"></span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-group mt-4 text-end">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Apply mask to inputs
+            $('input[data-mask]').mask('000.000.000.000.000,00', { reverse: true });
+
+            // Convert comma to dot before form submission
+            $('#produtoForm').on('submit', function () {
+                var precoInput = $('input[name="Preco.Valor"]');
+                var precoValue = precoInput.val().replace(/\./g, '').replace(',', '.');
+                precoInput.val(precoValue);
+            });
+
+            // Apply mask when loading data
+            var precoInput = $('input[name="Preco.Valor"]');
+            var precoValue = precoInput.val().replace('.', ',');
+            precoInput.val(precoValue).trigger('input');
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

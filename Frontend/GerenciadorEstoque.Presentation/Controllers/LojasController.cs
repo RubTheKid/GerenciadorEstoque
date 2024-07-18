@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GerenciadorEstoque.Presentation.Controllers;
 
-public class LojaController : Controller
+public class LojasController : Controller
 {
     private readonly ILojaService _lojaService;
     private readonly IEstoqueService _estoqueService;
-    private readonly ILogger<LojaController> _logger;
+    private readonly ILogger<LojasController> _logger;
 
-    public LojaController(ILojaService lojaService, ILogger<LojaController> logger, IEstoqueService estoqueService)
+    public LojasController(ILojaService lojaService, ILogger<LojasController> logger, IEstoqueService estoqueService)
     {
         _lojaService = lojaService;
         _logger = logger;
@@ -108,5 +108,16 @@ public class LojaController : Controller
         }
 
         return View(loja);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var result = await _lojaService.RemoveLojaAsync(id);
+        if (result)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        return View();
     }
 }

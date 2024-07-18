@@ -16,17 +16,17 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label asp-for="Nome" class="control-label"></label>
-                    <input asp-for="Nome" class="form-control" />
+                    <input asp-for="Nome" class="form-control"  />
                     <span asp-validation-for="Nome" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-2">
                     <label asp-for="Codigo.Codigo" class="control-label">Codigo da loja</label>
-                    <input asp-for="Codigo.Codigo" class="form-control" data-mask="0000" />
+                    <input asp-for="Codigo.Codigo" class="form-control" data-mask="0000" readonly  />
                     <span asp-validation-for="Codigo.Codigo" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-1">
                     <label asp-for="Telefone.CodigoArea" class="control-label">DDD</label>
-                    <input asp-for="Telefone.CodigoArea" class="form-control" data-mask="00"/>
+                    <input asp-for="Telefone.CodigoArea" class="form-control" data-mask="00" />
                     <span asp-validation-for="Telefone.CodigoArea" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-3">
@@ -81,10 +81,35 @@
             </fieldset>
 
             <div class="form-group mt-4 text-end">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+                
+            </div>
+            <div class="form-group mt-4 text-end">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Deletar</button>
             </div>
         </form>
+
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirma a remoção da loja?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Este processo é irreversível.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" asp-for="Id" />
+                            <input type="submit" value="Remover" class="btn btn-danger" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

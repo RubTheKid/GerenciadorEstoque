@@ -17,3 +17,9 @@ public class LojaDetalhesViewModel
     public LojaViewModel Loja { get; set; }
     public IEnumerable<EstoqueViewModel> Estoque { get; set; }
 }
+
+public class ProdutoDetalhesViewModel
+{
+    public ProdutoViewModel Produto { get; set; }
+    public IEnumerable<EstoqueViewModel> Estoque { get; set; }
+}
