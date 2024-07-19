@@ -1,4 +1,5 @@
 ﻿using GerenciadorEstoque.Presentation.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using System.Text.Json;
 
 namespace GerenciadorEstoque.Presentation.Services.ProdutoServices;
@@ -51,7 +52,7 @@ public class ProdutoService : IProdutoService
             produto.Nome,
             produto.Descricao,
             produto.Gtin,
-            produto.Preco.Valor,
+            preco = produto.Preco.Valor,
             produto.EstoqueMinimo
         };
 
@@ -61,7 +62,7 @@ public class ProdutoService : IProdutoService
         if (response.IsSuccessStatusCode)
         {
             var apiResponse = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<ProdutoViewModel>(apiResponse, _options);
+            return produto;
         }
         throw new Exception($"Erro ao atualizar produto: {response.ReasonPhrase}");
     }
@@ -75,7 +76,7 @@ public class ProdutoService : IProdutoService
             produto.Nome,
             produto.Descricao,
             produto.Gtin,
-            produto.Preco.Valor,
+            preco = produto.Preco.Valor,
             produto.EstoqueMinimo
         };
 
@@ -85,7 +86,7 @@ public class ProdutoService : IProdutoService
         if (response.IsSuccessStatusCode)
         {
             var apiResponse = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<ProdutoViewModel>(apiResponse, _options);
+            return produto;
         }
         throw new Exception($"Erro ao criar produto: {response.ReasonPhrase}");
     }
