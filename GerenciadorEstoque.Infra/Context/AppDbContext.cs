@@ -10,7 +10,7 @@ namespace GerenciadorEstoque.Infra.Context;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions options) : base(options) { }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     public DbSet<Loja> Lojas { get; set; }
     public DbSet<Produto> Produtos { get; set; }
@@ -27,5 +27,4 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new VendaProdutoMapping());
         base.OnModelCreating(modelBuilder);
     }
-
 }

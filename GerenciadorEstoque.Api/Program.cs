@@ -20,17 +20,16 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
-builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<AuthDbContext>(opt =>
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDbContext<AuthDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnection"),
         b => b.MigrationsAssembly("GerenciadorEstoque.Auth")));
 
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
@@ -41,13 +40,9 @@ builder.Services.AddScoped<IVendaProdutoRepository, VendaProdutoRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     Assembly.GetExecutingAssembly(),
-    typeof(GetAllProdutosHandler).Assembly 
-));
-
-
+    typeof(GetAllProdutosHandler).Assembly));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AuthDbContext>()
@@ -72,7 +67,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Admin", policy => policy.RequireRole("Administrator"));
@@ -89,11 +83,18 @@ using (var scope = app.Services.CreateScope())
     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
     var adminRole = "Administrator";
+    var userRole = "User";
 
     if (!await roleManager.RoleExistsAsync(adminRole))
     {
         await roleManager.CreateAsync(new IdentityRole(adminRole));
     }
+
+    if (!await roleManager.RoleExistsAsync(userRole))
+    {
+        await roleManager.CreateAsync(new IdentityRole(userRole));
+    }
+
     var adminEmail = "super@admin.com";
     var adminUserName = "superadmin";
     var adminPassword = "Senha123!";
@@ -106,15 +107,31 @@ using (var scope = app.Services.CreateScope())
             UserName = adminUserName,
             Email = adminEmail,
             FullName = "Super Admin",
+            RefreshToken = string.Empty,  //!!! valor padrão - evitar erro l102
+            RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7)
         };
 
         var result = await userManager.CreateAsync(newAdminUser, adminPassword);
         if (result.Succeeded)
         {
             await userManager.AddToRoleAsync(newAdminUser, adminRole);
+            await userManager.AddToRoleAsync(newAdminUser, userRole); // adicionando roles admin e user ao admin
+        }
+    }
+    else
+    {
+        //fallback pra certificar das roles
+        if (!await userManager.IsInRoleAsync(adminUser, adminRole))
+        {
+            await userManager.AddToRoleAsync(adminUser, adminRole);
+        }
+        if (!await userManager.IsInRoleAsync(adminUser, userRole))
+        {
+            await userManager.AddToRoleAsync(adminUser, userRole);
         }
     }
 }
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -122,15 +139,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
 
 //dotnet ef database update --project ./GerenciadorEstoque.Infra/ --startup-project ./GerenciadorEstoque.Api/
 //dotnet ef migrations add InitialCreateAuth --context AuthDbContext --project ./Auth/ --startup-project ./GerenciadorEstoque.Api/ 
 //dotnet ef database update --context AuthDbContext --project ./Auth/ --startup-project ./GerenciadorEstoque.Api/
-
