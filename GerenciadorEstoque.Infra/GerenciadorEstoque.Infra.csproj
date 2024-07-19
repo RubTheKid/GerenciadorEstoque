@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Auth\GerenciadorEstoque.Auth.csproj" />
     <ProjectReference Include="..\GerenciadorEstoque.Domain\GerenciadorEstoque.Domain.csproj" />
   </ItemGroup>
 
