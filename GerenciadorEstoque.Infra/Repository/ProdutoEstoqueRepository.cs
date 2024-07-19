@@ -81,5 +81,21 @@ namespace GerenciadorEstoque.Infra.Repository
             _context.ProdutoEstoques.RemoveRange(produtoEstoques);
             await _context.SaveChangesAsync();
         }
+
+
+        public async Task<bool> AtualizarQuantidadeEstoque(Guid lojaId, Guid produtoId, int quantidade)
+        {
+            var produtoEstoque = await GetById(lojaId, produtoId);
+            if (produtoEstoque == null)
+            {
+                return false;
+            }
+
+            produtoEstoque.AlterarQuantidade(quantidade);
+            _context.ProdutoEstoques.Update(produtoEstoque);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

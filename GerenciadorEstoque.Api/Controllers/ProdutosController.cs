@@ -70,7 +70,7 @@ public class ProdutosController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> Put(UpdateProdutoRequest request)
     {
-        
+
         var response = await _mediator.Send(request);
 
         if (response is null) return NotFound();

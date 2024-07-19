@@ -2,6 +2,8 @@ using GerenciadorEstoque.Application.ProdutoAggregate.Query.GetAllProdutos;
 using GerenciadorEstoque.Domain.Aggregates.LojaAggregate.Interfaces;
 using GerenciadorEstoque.Domain.Aggregates.ProdutoAggregate.Interfaces;
 using GerenciadorEstoque.Domain.Aggregates.ProdutoEstoqueAggregate.Interfaces;
+using GerenciadorEstoque.Domain.Aggregates.VendaAggregate.Interfaces;
+using GerenciadorEstoque.Domain.Aggregates.VendaProdutoAggregate.Interfaces;
 using GerenciadorEstoque.Infra.Context;
 using GerenciadorEstoque.Infra.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +25,8 @@ builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Conf
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ILojaRepository, LojaRepository>();
 builder.Services.AddScoped<IProdutoEstoqueRepository, ProdutoEstoqueRepository>();
+builder.Services.AddScoped<IVendaRepository, VendaRepository>();
+builder.Services.AddScoped<IVendaProdutoRepository, VendaProdutoRepository>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 

@@ -1,5 +1,4 @@
-﻿using GerenciadorEstoque.Domain.Aggregates.LojaAggregate;
-using GerenciadorEstoque.Presentation.Models;
+﻿using GerenciadorEstoque.Presentation.Models;
 using GerenciadorEstoque.Presentation.Services.EstoqueServices;
 using GerenciadorEstoque.Presentation.Services.ProdutoServices;
 using Microsoft.AspNetCore.Mvc;
@@ -68,9 +67,9 @@ public class ProdutosController : Controller
 
         if (ModelState.IsValid)
         {
-            var updatedProduto = await _produtoService.UpdateProduto(produto); 
+            var updatedProduto = await _produtoService.UpdateProduto(produto);
 
-            if(updatedProduto != null)
+            if (updatedProduto != null)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -96,7 +95,7 @@ public class ProdutosController : Controller
             await _produtoService.CreateProduto(produto);
             return RedirectToAction(nameof(Index));
         }
-        
+
         return View(produto);
     }
 

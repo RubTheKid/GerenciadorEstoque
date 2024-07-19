@@ -1,5 +1,4 @@
 ﻿using GerenciadorEstoque.Presentation.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
 using System.Text.Json;
 
 namespace GerenciadorEstoque.Presentation.Services.ProdutoServices;

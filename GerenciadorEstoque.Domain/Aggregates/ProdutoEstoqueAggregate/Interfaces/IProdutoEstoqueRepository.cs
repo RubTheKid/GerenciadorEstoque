@@ -10,5 +10,6 @@ public interface IProdutoEstoqueRepository
     Task<ProdutoEstoque> Update(ProdutoEstoque produtoEstoque);
     Task Delete(Guid lojaId, Guid produtoId);
     Task DeleteByProdutoId(Guid produtoId);
+    Task<bool> AtualizarQuantidadeEstoque(Guid lojaId, Guid produtoId, int quantidade);
 
 }
