@@ -1,6 +1,10 @@
+using GerenciadorEstoque.Presentation.Services;
 using GerenciadorEstoque.Presentation.Services.EstoqueServices;
 using GerenciadorEstoque.Presentation.Services.LojaServices;
 using GerenciadorEstoque.Presentation.Services.ProdutoServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,12 +27,30 @@ builder.Services.AddScoped<IProdutoService, ProdutoService>();
 
 // session control
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
+
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ApiService>();
 
 var app = builder.Build();
 
@@ -43,6 +65,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
@@ -54,4 +77,5 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "defaultProtected",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.Run();

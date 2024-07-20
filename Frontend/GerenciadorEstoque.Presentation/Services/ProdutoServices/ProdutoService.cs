@@ -8,17 +8,18 @@ public class ProdutoService : IProdutoService
     private readonly IHttpClientFactory _clientFactory;
     private readonly JsonSerializerOptions _options;
     private const string apiEndpoint = "api/produtos";
+    private readonly ApiService _apiService;
 
-    public ProdutoService(IHttpClientFactory clientFactory, JsonSerializerOptions options)
+    public ProdutoService(IHttpClientFactory clientFactory, JsonSerializerOptions options, ApiService apiService)
     {
         _clientFactory = clientFactory;
         _options = options;
+        _apiService = apiService;
     }
 
     public async Task<IEnumerable<ProdutoViewModel>> GetAllProdutos()
     {
-        var client = _clientFactory.CreateClient("GerenciadorApi");
-        var response = await client.GetAsync(apiEndpoint);
+        var response = await _apiService.Get(apiEndpoint);
 
         if (response.IsSuccessStatusCode)
         {

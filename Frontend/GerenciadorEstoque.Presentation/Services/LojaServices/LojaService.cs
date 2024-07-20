@@ -8,17 +8,18 @@ public class LojaService : ILojaService
     private readonly IHttpClientFactory _clientFactory;
     private readonly JsonSerializerOptions _options;
     private const string apiEndpoint = "api/lojas";
+    private readonly ApiService _apiService;
 
-    public LojaService(IHttpClientFactory clientFactory, JsonSerializerOptions options)
+    public LojaService(IHttpClientFactory clientFactory, JsonSerializerOptions options, ApiService apiService)
     {
         _clientFactory = clientFactory;
         _options = options;
+        _apiService = apiService;
     }
 
     public async Task<IEnumerable<LojaViewModel>> GetAllLojasAsync()
     {
-        var client = _clientFactory.CreateClient("GerenciadorApi");
-        var response = await client.GetAsync(apiEndpoint);
+        var response = await _apiService.Get(apiEndpoint);
 
         if (response.IsSuccessStatusCode)
         {
@@ -29,10 +30,23 @@ public class LojaService : ILojaService
         return null;
     }
 
+    //public async Task<LojaViewModel> GetLojaByIdAsync(Guid id)
+    //{
+    //    var client = _clientFactory.CreateClient("GerenciadorApi");
+    //    var response = await client.GetAsync($"{apiEndpoint}/{id}");
+
+    //    if (response.IsSuccessStatusCode)
+    //    {
+    //        var apiResponse = await response.Content.ReadAsStreamAsync();
+    //        var loja = await JsonSerializer.DeserializeAsync<LojaViewModel>(apiResponse, _options);
+    //        return loja;
+    //    }
+    //    return null;
+    //}
+
     public async Task<LojaViewModel> GetLojaByIdAsync(Guid id)
     {
-        var client = _clientFactory.CreateClient("GerenciadorApi");
-        var response = await client.GetAsync($"{apiEndpoint}/{id}");
+        var response = await _apiService.Get($"{apiEndpoint}/{id}");
 
         if (response.IsSuccessStatusCode)
         {

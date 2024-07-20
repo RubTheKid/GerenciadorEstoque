@@ -1,4 +1,5 @@
 ﻿using GerenciadorEstoque.Presentation.Models;
+using GerenciadorEstoque.Presentation.Services;
 using GerenciadorEstoque.Presentation.Services.EstoqueServices;
 using GerenciadorEstoque.Presentation.Services.LojaServices;
 using Microsoft.AspNetCore.Mvc;
@@ -10,12 +11,14 @@ public class LojasController : Controller
     private readonly ILojaService _lojaService;
     private readonly IEstoqueService _estoqueService;
     private readonly ILogger<LojasController> _logger;
+    private readonly ApiService _apiService;
 
-    public LojasController(ILojaService lojaService, ILogger<LojasController> logger, IEstoqueService estoqueService)
+    public LojasController(ILojaService lojaService, ILogger<LojasController> logger, IEstoqueService estoqueService, ApiService apiService)
     {
         _lojaService = lojaService;
         _logger = logger;
         _estoqueService = estoqueService;
+        _apiService = apiService;
     }
 
     [HttpGet]
