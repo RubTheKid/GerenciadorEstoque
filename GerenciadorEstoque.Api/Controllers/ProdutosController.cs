@@ -46,17 +46,6 @@ public class ProdutosController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("gtin/{gtin}")]
-    public async Task<IActionResult> GetProdutoByGtin(string gtin)
-    {
-        var query = new GetProdutoByGtinRequest(gtin);
-        var result = await _mediator.Send(query);
-
-        if (result is null) return NotFound();
-
-        return Ok(result);
-    }
-
     [HttpPost]
     public async Task<IActionResult> Post(AddProdutoRequest request)
     {

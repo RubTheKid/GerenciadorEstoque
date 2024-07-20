@@ -7,7 +7,7 @@ public class RegistrarVendaViewModel
     public List<ProdutoVendaViewModel> ProdutosVendidos { get; set; }
     public List<LojaViewModel> Lojas { get; set; }
     public List<ProdutoViewModel> Produtos { get; set; }
-    public List<EstoqueViewModel> Estoque {  get; set; }
+    public List<EstoqueViewModel> Estoque { get; set; }
 }
 
 public class ProdutoVendaViewModel

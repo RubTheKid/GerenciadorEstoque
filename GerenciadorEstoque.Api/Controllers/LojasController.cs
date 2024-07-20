@@ -45,17 +45,6 @@ public class LojasController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("code/{codigo}")]
-    public async Task<IActionResult> GetLojaByCode(string codigo)
-    {
-        var query = new GetLojaByCodigoRequest(codigo);
-        var result = await _mediator.Send(query);
-
-        if (result is null) return NotFound();
-
-        return Ok(result);
-    }
-
     [HttpPost]
     public async Task<IActionResult> Post(AddLojaRequest request)
     {
