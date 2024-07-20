@@ -59,3 +59,7 @@ Ao meu ver, essa proposta de ter endpoints CRUD para toda aplicação gera código 
 ## Diferenciais
 
 Vale a pena destacar que não foi utilizado o AutoMapper nesse projeto. Minha opção por não utilizar AutoMapper vem de muita frustração pela dificuldade de configurar o mapeamento de entidades, e a perda de performance que ele causa.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
