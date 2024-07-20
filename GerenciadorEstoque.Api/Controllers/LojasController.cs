@@ -4,12 +4,14 @@ using GerenciadorEstoque.Application.LojaAggregate.Command.UpdateLoja.Request;
 using GerenciadorEstoque.Application.LojaAggregate.Query.GetAll.Request;
 using GerenciadorEstoque.Application.LojaAggregate.Query.GetLoja.Request;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GerenciadorEstoque.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class LojasController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -20,6 +22,7 @@ public class LojasController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAllLojas()
     {
         var query = new GetAllLojasRequest();
@@ -31,6 +34,7 @@ public class LojasController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> GetLojaById(Guid id)
     {
         var query = new GetLojaByIdRequest(id);

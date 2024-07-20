@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
 
@@ -22,7 +23,37 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization Header - utilizado com Bearer Authentication.\r\n\r\n" +
+                        "Digite 'Bearer' [espaço] e então seu token no campo abaixo.\r\n\r\n" +
+                        "Exemplo (informar sem as aspas): 'Bearer 12345abcdef'",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+            },
+            new List<string>()
+        }
+    });
+});
+
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -62,10 +93,11 @@ builder.Services.AddAuthentication(options =>
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
+
 
 builder.Services.AddAuthorization(options =>
 {
@@ -107,7 +139,7 @@ using (var scope = app.Services.CreateScope())
             UserName = adminUserName,
             Email = adminEmail,
             FullName = "Super Admin",
-            RefreshToken = string.Empty,  //!!! valor padrão - evitar erro l102
+            RefreshToken = string.Empty,
             RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7)
         };
 
@@ -115,12 +147,11 @@ using (var scope = app.Services.CreateScope())
         if (result.Succeeded)
         {
             await userManager.AddToRoleAsync(newAdminUser, adminRole);
-            await userManager.AddToRoleAsync(newAdminUser, userRole); // adicionando roles admin e user ao admin
+            await userManager.AddToRoleAsync(newAdminUser, userRole);
         }
     }
     else
     {
-        //fallback pra certificar das roles
         if (!await userManager.IsInRoleAsync(adminUser, adminRole))
         {
             await userManager.AddToRoleAsync(adminUser, adminRole);
@@ -144,6 +175,6 @@ app.UseAuthorization();
 app.MapControllers();
 app.Run();
 
-//dotnet ef database update --project ./GerenciadorEstoque.Infra/ --startup-project ./GerenciadorEstoque.Api/
-//dotnet ef migrations add InitialCreateAuth --context AuthDbContext --project ./Auth/ --startup-project ./GerenciadorEstoque.Api/ 
+//dotnet ef migrations add InitialCreateAuth --context AuthDbContext --project ./Auth/ --startup-project ./GerenciadorEstoque.Api/
+//dotnet ef database update --context AppDbContext --project ./GerenciadorEstoque.Infra/ --startup-project ./GerenciadorEstoque.Api/
 //dotnet ef database update --context AuthDbContext --project ./Auth/ --startup-project ./GerenciadorEstoque.Api/
