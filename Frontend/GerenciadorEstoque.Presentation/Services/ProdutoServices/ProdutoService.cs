@@ -31,8 +31,17 @@ public class ProdutoService : IProdutoService
 
     public async Task<ProdutoViewModel> GetProdutoById(Guid id)
     {
-        var client = _clientFactory.CreateClient("GerenciadorApi");
-        var response = await client.GetAsync($"{apiEndpoint}/{id}");
+        //var client = _clientFactory.CreateClient("GerenciadorApi");
+        //var response = await client.GetAsync($"{apiEndpoint}/{id}");
+
+        //if (response.IsSuccessStatusCode)
+        //{
+        //    var apiResponse = await response.Content.ReadAsStringAsync();
+        //    return JsonSerializer.Deserialize<ProdutoViewModel>(apiResponse, _options);
+        //}
+        //return null;
+
+        var response = await _apiService.Get($"{apiEndpoint}/{id}");
 
         if (response.IsSuccessStatusCode)
         {

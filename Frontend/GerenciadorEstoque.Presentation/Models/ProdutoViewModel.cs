@@ -1,13 +1,21 @@
-﻿namespace GerenciadorEstoque.Presentation.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GerenciadorEstoque.Presentation.Models;
 
 
 public class ProdutoViewModel
 {
     public Guid Id { get; set; }
+    [Required]
     public string Nome { get; set; }
+    [Required]
     public string Descricao { get; set; }
+    [Required]
+    [StringLength(11, ErrorMessage = "GTIN deve ter 11 caracteres.")]
     public string Gtin { get; set; }
+    [Required]
     public PrecoViewModel Preco { get; set; }
+    [Required]
     public int EstoqueMinimo { get; set; }
 }
 
@@ -15,6 +23,7 @@ public class ProdutoViewModel
 
 public class PrecoViewModel
 {
+    [Required]
     public decimal Valor { get; set; }
 }
 

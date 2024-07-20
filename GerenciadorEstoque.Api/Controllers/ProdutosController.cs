@@ -4,12 +4,14 @@ using GerenciadorEstoque.Application.ProdutoAggregate.Command.UpdateProduto.Requ
 using GerenciadorEstoque.Application.ProdutoAggregate.Query.GetAllProdutos.Request;
 using GerenciadorEstoque.Application.ProdutoAggregate.Query.GetProduto.Request;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GerenciadorEstoque.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class ProdutosController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -20,6 +22,7 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAllProdutos()
     {
         var query = new GetAllProdutosRequest();
@@ -32,6 +35,7 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> GetProdutoById(Guid id)
     {
         var query = new GetProdutoByIdRequest(id);
